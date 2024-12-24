@@ -32,11 +32,11 @@ public class PostEntity {
     private String videoUrl;
 
     private boolean accessible;
-    private boolean deleted;
+//    private boolean deleted;
     @Column(nullable = false)
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
-    private LocalDateTime deletedAt;
+//    private LocalDateTime deletedAt;
 }
 
 

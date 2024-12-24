@@ -20,6 +20,7 @@ public class UserEntity {
     private String id;
     @Column(nullable = false, length = 50)
     private String name;
+    private String surname;
     private String email;
     private String password;
     private String profilePicture;

@@ -14,7 +14,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto findById(Long aLong) {
+    public PostDto findById(Long id) {
         return null;
     }
 
@@ -24,12 +24,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto modify(Long aLong, PostDto model) {
+    public PostDto modify(Long id, PostDto model) {
         return null;
     }
 
     @Override
-    public void removeById(Long aLong) {
+    public void removeById(Long id) {
 
     }
 }

@@ -12,15 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository repository;
     private final PostMapper mapper;
 
-    public PostServiceImpl(PostRepository repository, PostMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
 
     @Override
     public List<PostDto> findAll() {

@@ -10,45 +10,45 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Primary;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 @Primary
 @Mapper(componentModel = "spring")
 public interface PostMapper extends SimpleMapper<PostEntity, PostDto> {
     PostMapper INSTANCE = Mappers.getMapper(PostMapper.class);
 
+    @Override
     @Mapping(source = "userId", target = "userEntity.id")
-    PostEntity toPostEntity(PostDto postDto);
+    PostEntity toEntity(PostDto postDto);
 
+    @Override
     @Mapping(source = "userEntity.id", target = "userId")
-    PostDto toPostDto(PostEntity postEntity);
-//
-//
+    PostDto toDto(PostEntity postEntity);
+
     @Mapping(source = "userEntity.id", target = "userId")
     @Mapping(source = "createdAt", target = "postedAt")
     @Mapping(source = "userEntity", target = "fullName", qualifiedByName = "fullName")
     @Mapping(source = "createdAt", target = "postedAgo", qualifiedByName = "timeAgo")
     ListingPostDto toListingPostDto(PostEntity postEntity);
-//
+
     @Named("fullName")
     default String fullName(UserEntity userEntity) {
-        return "";
+        return userEntity.getName() + " " + userEntity.getSurname();
     }
-//
+
     @Named("timeAgo")
-    default String timeAgo(PostEntity postEntity) {
-        // use Period to find how many minutes, hourse, seconds has passed
-        // between postEntity.getCreatedAt() and now
-
-        return postEntity.getCreatedAt().toString();
+    default String timeAgo(LocalDateTime createdAt) {
+        return createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
+
+    @Override
+    @Mapping(target = "userEntity.id", source = "userId")
+    List<PostEntity> toEntities(List<PostDto> dtos);
+
+    @Override
+    @Mapping(target = "userEntity.id", source = "userId")
+    List<PostDto> toDtos(List<PostEntity> entities);
 }
-
-
-
-
-
-
-
-
-
-
 

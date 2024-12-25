@@ -1,18 +1,7 @@
-package dev.naimsulejmani.gr1facebook.entities;
+package dev.naimsulejmani.gr1facebook.dtos;
 
-
-import jakarta.persistence.*;
-
-import java.util.List;
-
-
-
-@Entity(name = "users")
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDto {
     private String id;
-    @Column(nullable = false, length = 50)
     private String name;
     private String surname;
     private String email;
@@ -25,13 +14,10 @@ public class UserEntity {
     private String birthday;
     private String gender;
 
-    @OneToMany(mappedBy = "userEntity")
-    private List<PostEntity> postEntities;
-
-    public UserEntity() {
+    public UserDto() {
     }
 
-    public UserEntity(String id, String name, String surname, String email, String password, String profilePicture, String coverPicture, String bio, String location, String website, String birthday, String gender, List<PostEntity> postEntities) {
+    public UserDto(String id, String name, String surname, String email, String password, String profilePicture, String coverPicture, String bio, String location, String website, String birthday, String gender) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -44,7 +30,6 @@ public class UserEntity {
         this.website = website;
         this.birthday = birthday;
         this.gender = gender;
-        this.postEntities = postEntities;
     }
 
     public String getId() {
@@ -142,25 +127,4 @@ public class UserEntity {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-    public List<PostEntity> getPostEntities() {
-        return postEntities;
-    }
-
-    public void setPostEntities(List<PostEntity> postEntities) {
-        this.postEntities = postEntities;
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

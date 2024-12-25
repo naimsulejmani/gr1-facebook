@@ -20,19 +20,19 @@ public interface PostMapper extends SimpleMapper<PostEntity, PostDto> {
 
     @Mapping(source = "userEntity.id", target = "userId")
     PostDto toPostDto(PostEntity postEntity);
-
-
+//
+//
     @Mapping(source = "userEntity.id", target = "userId")
     @Mapping(source = "createdAt", target = "postedAt")
     @Mapping(source = "userEntity", target = "fullName", qualifiedByName = "fullName")
     @Mapping(source = "createdAt", target = "postedAgo", qualifiedByName = "timeAgo")
     ListingPostDto toListingPostDto(PostEntity postEntity);
-
+//
     @Named("fullName")
     default String fullName(UserEntity userEntity) {
-        return userEntity.getName() + " " + userEntity.getSurname();
+        return "";
     }
-
+//
     @Named("timeAgo")
     default String timeAgo(PostEntity postEntity) {
         // use Period to find how many minutes, hourse, seconds has passed

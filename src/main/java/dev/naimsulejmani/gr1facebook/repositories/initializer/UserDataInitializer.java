@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 public class UserDataInitializer implements Runnable {
 
     private final UserRepository userRepository;
+    // password encoder
 
     @Autowired
     public UserDataInitializer(UserRepository userRepository) {
@@ -27,7 +28,7 @@ public class UserDataInitializer implements Runnable {
             user1.setBirthday("1990-01-01");
             user1.setBio("TEST");
             user1.setGender("M");
-            user1.setPassword("123123123");
+            user1.setPassword("123123123"); //password.encode("123123123")
             user1.setWebsite("https://example.com");
             user1.setProfilePicture("https://example.com/profile.jpg");
             userRepository.save(user1);

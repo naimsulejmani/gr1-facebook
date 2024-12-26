@@ -3,6 +3,7 @@ package dev.naimsulejmani.gr1facebook.controllers.api.v1;
 import dev.naimsulejmani.gr1facebook.dtos.PostDto;
 import dev.naimsulejmani.gr1facebook.services.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class PostRestController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public PostDto add(@RequestBody PostDto model) {
         return service.add(model);
     }
@@ -35,8 +37,14 @@ public class PostRestController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeById(@PathVariable long id) {
         service.removeById(id);
+    }
+
+    @GetMapping("/default")
+    public PostDto defaultPost() {
+        return new PostDto();
     }
 
 }

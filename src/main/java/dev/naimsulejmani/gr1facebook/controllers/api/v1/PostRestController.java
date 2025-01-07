@@ -2,6 +2,9 @@ package dev.naimsulejmani.gr1facebook.controllers.api.v1;
 
 import dev.naimsulejmani.gr1facebook.dtos.PostDto;
 import dev.naimsulejmani.gr1facebook.services.PostService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,18 +30,18 @@ public class PostRestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PostDto add(@RequestBody PostDto model) {
+    public PostDto add(@Valid @RequestBody PostDto model) {
         return service.add(model);
     }
 
     @PutMapping("/{id}")
-    public PostDto modify(@PathVariable long id, @RequestBody PostDto model) {
+    public PostDto modify(@PathVariable long id, @Valid @RequestBody PostDto model) {
         return service.modify(id, model);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeById(@PathVariable long id) {
+    public void removeById(@Valid @Positive @PathVariable long id) {
         service.removeById(id);
     }
 

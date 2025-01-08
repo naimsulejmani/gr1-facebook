@@ -18,6 +18,7 @@ import java.util.List;
 public class PostRestController {
     private final PostService service;
 
+
     @GetMapping
     public List<PostDto> findAll() {
         return service.findAll();

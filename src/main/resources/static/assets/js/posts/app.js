@@ -23,6 +23,24 @@ class PostApp {
     async init() {
         this.loadPosts();
 
+        this.postsTBody.addEventListener("click", async (event) => {
+            console.log(event);
+            console.log(event.target)
+            if (event.target.tagName === "BUTTON" && event.target.innerText === 'DELETE') {
+
+                if (!confirm(`Are you sure you want to delete post with id ${event.target.dataset.id}?`)) {
+                    return;
+                }
+
+                // let id = event.target.parentElement.parentElement.firstElementChild.textContent;
+                // console.log(id)
+                console.log(event.target.dataset.id)
+                const id = event.target.dataset.id;
+                await this.postApi.removeById(id);
+                await this.loadPosts();
+
+            }
+        });
     }
 
     async loadPosts() {
@@ -51,7 +69,8 @@ class PostApp {
                     <td>${post.content}</td>
                     <td>${post.createdAt}</td>
                     <td>
-                        <button class="btn btn-danger" type="button">DELETE</button>
+                        <button class="btn btn-danger" type="button" data-id="${post.id}"
+                        data-accessible="${post.accessible}">DELETE</button>
                     </td>
                 </tr>
             `;

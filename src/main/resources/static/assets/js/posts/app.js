@@ -17,9 +17,15 @@ class PostApp {
         this.postsTBody = document.getElementById("posts");
         this.loaderDiv = document.getElementById("loader");
         this.mainTable = document.querySelector("div.table-responsive");
+        this.body = document.querySelector("body");
     }
 
     async init() {
+        this.loadPosts();
+
+    }
+
+    async loadPosts() {
         this.mainTable.style = {display: "none"};
         this.loaderDiv.style.display = "block";
 

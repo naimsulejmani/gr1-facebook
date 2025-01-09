@@ -11,10 +11,18 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Posts</h1>
-            <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                    Create Post
-                </button>
+            <div class="col-md-12">
+                <form id="formPost">
+                    <div class="form-floating">
+                        <input type="hidden" name="userId" id="userId" value="1"/>
+                        <textarea class="form-control" placeholder="Leave a comment here"
+                                  id="comment" style="height: 100px" name="comment" required
+                        minlength="1"></textarea>
+                        <label for="comment">Comments</label>
+                    </div>
+                    <button class="btn btn-primary mt-2" id="btnPost" type="submit">Post</button>
+                    <button class="btn btn-secondary mt-2" id="btnRefresh" type="button">Refresh</button>
+                </form>
             </div>
 
 

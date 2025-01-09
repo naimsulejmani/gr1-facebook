@@ -18,9 +18,50 @@ class PostApp {
         this.loaderDiv = document.getElementById("loader");
         this.mainTable = document.querySelector("div.table-responsive");
         this.body = document.querySelector("body");
+        this.formPost = document.getElementById("formPost");
+        this.btnRefresh = document.getElementById("btnRefresh");
     }
 
     async init() {
+
+        this.formPost.addEventListener("submit", async(event) =>{
+            event.preventDefault();
+            console.log(event)
+            console.log(event.target)
+
+            // Create a FormData object from the form
+            const formData = new FormData(event.target);
+
+            // Get the comment from the FormData object
+            const comment = formData.get("comment");
+            // Optionally, convert FormData to a plain JavaScript object
+            const formDataObject = {};
+            formData.forEach((value, key) => {
+                formDataObject[key] = value;
+            });
+
+            console.log(formDataObject);
+            const post = {
+                id:0,
+                userId:formDataObject.userId,
+                content: comment,
+                imageUrl:'',
+                videoUrl: '',
+                accessible: true,
+                createdAt: new Date(),
+                modifiedAt: null
+            };
+
+            await this.postApi.add(post);
+            await this.loadPosts();
+            event.target.reset();
+
+        });
+
+        this.btnRefresh.addEventListener("click",(event)=>{
+            this.loadPosts();
+        })
+
         this.loadPosts();
 
         this.postsTBody.addEventListener("click", async (event) => {
